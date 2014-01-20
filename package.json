@@ -1,0 +1,20 @@
+{
+  "name": "callback-logger",
+  "version": "0.0.0",
+  "description": "Log a function's result with its callback",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "Manuel Cabral (m.cabral@digisfera.pt)",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "cli-color": "~0.2.3",
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.17.0"
+  }
+}
