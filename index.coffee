@@ -2,7 +2,7 @@ _ = require('lodash')
 clc = require('cli-color')
 
 module.exports = (successColor = 'green', errorColor = 'red', logFunction = console.log, traceFunction = console.trace) ->
-  logGen = (customSuccessMessage, customErrorMessage) ->
+  logCallback = (customSuccessMessage, customErrorMessage) ->
     (err, res) ->
 
       templateData = { err: err, res: res }
@@ -15,13 +15,19 @@ module.exports = (successColor = 'green', errorColor = 'red', logFunction = cons
           if customSuccessMessage then _.template(customSuccessMessage, templateData)
           else "Success"
 
-      if err
-        logFunction(clc.red(message))
-        traceFunction(err)
-      else
-        logFunction(clc.green(message))
+      if err then logError(msg, err)      
+      else logSuccess(msg, res)
+        
 
-  logGen.success = (msg) -> logGen(msg)(null)
-  logGen.error = (msg) -> logGen(null, msg)(true)
+  logSuccess = (msg, res) ->
+    logFunction(clc.green(msg))
+
+  logError = (msg, err) ->
+    logFunction(clc.red(message))
+    traceFunction(err)
   
-  logGen
+  {
+    cb: logCallback
+    success: logSuccess
+    error: logError
+  }
