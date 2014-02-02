@@ -40,11 +40,11 @@ Underscore templating may be used on `successMessage` and `errorMessage`. The va
 
 ## Example
 
-  var logger = require('callback-logger')();
+    var logger = require('callback-logger')();
 
-  fs.writeFile('file.txt', 'contents', logger.cb('Successfully wrote file', 'Error while writing file'));
+    fs.writeFile('file.txt', 'contents', logger.cb('Successfully wrote file', 'Error while writing file'));
 
-  glob('*.txt', logger.cb('Found <%= res.length %> files', 'Error on glob'));
+    glob('*.txt', logger.cb('Found <%= res.length %> files', 'Error on glob'));
 
-  logger.success('Done something');
-  logger.error('Something went wrong');
+    logger.success('Done something');
+    logger.error('Something went wrong');
