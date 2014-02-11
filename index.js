@@ -9,17 +9,23 @@ module.exports = function(options) {
   options.logFunction = typeof options.traceFunction === 'undefined' ? console.log : (options.logFunction || function() {});
   options.traceErrors = typeof options.traceErrors === 'undefined' ? true : options.traceErrors;
 
+  function ringBell() {
+    options.logFunction("\007");
+  }
+
   function logSuccess(msg) {
     options.logFunction(clc[options.successColor](msg));
   }
   
   function logError(msg, err) {
+
     if(err && options.traceErrors) {
       msg += "\n"
       if(err.stack) { msg += err.stack; }
       else { msg += err; }
     }
 
+    ringBell();
     options.logFunction(clc[options.errorColor](msg));
   }
     
