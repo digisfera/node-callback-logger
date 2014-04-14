@@ -30,12 +30,13 @@ Log a message as a success
 Log a message as an error. If `err` is passed and `options.traceErrors` is true, the stack trace will also be logged.
 
 
-### logger.cb(successMessage, errorMessage)
+### logger.cb(successMessage, errorMessage, callback)
 
 Return a function which logs the result of a callback of type `(err, success)`. If `err` is defined, `errorMessage` is used, otherwise `successMessage` is used.
 
 Underscore templating may be used on `successMessage` and `errorMessage`. The variables `err` and `res` contain the result of the callback
 
+An optional callback can be passed which is executed after the log messages.
 
 
 ## Example

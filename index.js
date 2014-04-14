@@ -16,7 +16,7 @@ module.exports = function(options) {
   function logSuccess(msg) {
     options.logFunction(clc[options.successColor](msg));
   }
-  
+
   function logError(msg, err) {
 
     if(err && options.traceErrors) {
@@ -28,10 +28,10 @@ module.exports = function(options) {
     ringBell();
     options.logFunction(clc[options.errorColor](msg));
   }
-    
 
-  function logCallback(successMessage, errorMessage) {
 
+  function logCallback(successMessage, errorMessage, callback) {
+    callback = callback || function(){};
 
     return function(err, res) {
 
@@ -41,12 +41,14 @@ module.exports = function(options) {
                   _.template(errorMessage || "Error", templateData) :
                   _.template(successMessage || "Success", templateData);
 
-      
+
       if(err) { logError(msg, err); }
       else { logSuccess(msg); }
+
+      callback();
     }
   }
-  
+
   return {
     cb: logCallback,
     success: logSuccess,
