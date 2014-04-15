@@ -45,7 +45,7 @@ module.exports = function(options) {
       if(err) { logError(msg, err); }
       else { logSuccess(msg); }
 
-      callback();
+      callback(err, res);
     }
   }
 
